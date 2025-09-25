@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Hero section */
+.hero {
+  background: url("../images/ferry_building.jpg") no-repeat center center/cover;
+  height: 100vh;
+}
+
+/* Section headings */
+h2 {
+  color: #004c99;
+  font-weight: bold;
+}
+

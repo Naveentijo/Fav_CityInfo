@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>San Francisco - Your Ultimate City Guide</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --sf-blue: #004c99;
+      --sf-orange: #ff6b35;
+      --sf-fog: #f8f9fa;
+      --sf-dark: #2c3e50;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      scroll-behavior: smooth;
+      padding-top: 76px;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, var(--sf-blue), var(--sf-dark)) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white !important;
+    }
+
+    .nav-link {
+      color: white !important;
+      font-weight: 500;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--sf-orange) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,76,153,0.7), rgba(44,62,80,0.7)),
+                  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="%23004c99"/><circle cx="200" cy="200" r="80" fill="%23ff6b35" opacity="0.3"/><rect x="800" y="100" width="300" height="600" fill="%23f8f9fa" opacity="0.1"/><polygon points="400,800 600,400 800,800" fill="%23ff6b35" opacity="0.2"/></svg>');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Styling */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      color: var(--sf-blue);
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--sf-orange), var(--sf-blue));
+      border-radius: 2px;
+    }
+
+    /* Cards */
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-img-top {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      color: var(--sf-blue);
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Restaurant Items */
+    .restaurant-item {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--sf-orange);
+    }
+
+    .restaurant-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .restaurant-name {
+      color: var(--sf-blue);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .restaurant-rating {
+      color: var(--sf-orange);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Activities Grid */
+    .activity-item {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 15px;
+      background: white;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .activity-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .activity-icon {
+      font-size: 3rem;
+      color: var(--sf-orange);
+      margin-bottom: 1rem;
+    }
+
+    .activity-title {
+      color: var(--sf-blue);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Events */
+    .event-item {
+      background: linear-gradient(135deg, var(--sf-blue), var(--sf-dark));
+      color: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: var(--sf-orange);
+      border-radius: 50%;
+      transform: translate(30%, -30%);
+      opacity: 0.1;
+    }
+
+    .event-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-date {
+      color: var(--sf-orange);
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .form-control {
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      padding: 12px 15px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--sf-orange);
+      box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--sf-orange), #e55a2b);
+      border: none;
+      border-radius: 10px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+    }
+
+    /* Map Container */
+    .map-container {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--sf-dark), var(--sf-blue));
+      color: white;
+      padding: 3rem 0 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#intro">
+        <i class="fas fa-city me-2"></i>San Francisco
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#intro">Introduction</a></li>
+          <li class="nav-item"><a class="nav-link" href="#attractions">Attractions</a></li>
+          <li class="nav-item"><a class="nav-link" href="#restaurants">Restaurants</a></li>
+          <li class="nav-item"><a class="nav-link" href="#things">Things to Do</a></li>
+          <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="intro">
+    <div class="hero-content">
+      <h1>Welcome to San Francisco</h1>
+      <p class="lead">Discover the magic of the City by the Bay - from iconic landmarks to world-class dining, vibrant culture, and endless adventures</p>
+      <div class="row text-center mt-4">
+        <div class="col-md-4">
+          <div class="d-flex align-items-center justify-content-center">
+            <i class="fas fa-users fa-2x me-3"></i>
+            <div>
+              <h4>884,000+</h4>
+              <p>Residents</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="d-flex align-items-center justify-content-center">
+            <i class="fas fa-mountain fa-2x me-3"></i>
+            <div>
+              <h4>43</h4>
+              <p>Hills</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="d-flex align-items-center justify-content-center">
+            <i class="fas fa-thermometer-half fa-2x me-3"></i>
+            <div>
+              <h4>60-70°F</h4>
+              <p>Year Round</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attractions Section -->
+  <section id="attractions" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title">Iconic Attractions</h2>
+      
+      <div class="row g-4 mb-5">
+        <div class="col-lg-4 col-md-6">
+          <div class="card">
+            <img src="Photos\pexels-pixabay-161764.jpg" class="card-img-top" alt="Golden Gate Bridge">
+            <div class="card-body">
+              <h5 class="card-title">Golden Gate Bridge</h5>
+              <p class="card-text">An iconic 1.7-mile suspension bridge connecting San Francisco to Marin County. Perfect for walking, biking, or simply admiring the stunning views.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card">
+            <img src="Photos\pexels-kelly-11815986.jpg" class="card-img-top" alt="Alcatraz Island">
+            <div class="card-body">
+              <h5 class="card-title">Alcatraz Island</h5>
+              <p class="card-text">Historic former federal prison located on a rocky island. Take a ferry tour to explore the cells and learn about famous escape attempts.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card">
+            <img src="Photos\chinatown.jpg" class="card-img-top" alt="Chinatown">
+            <div class="card-body">
+              <h5 class="card-title">Chinatown</h5>
+              <p class="card-text">The oldest Chinatown in North America and largest outside of Asia. Explore authentic restaurants, shops, and cultural landmarks.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card">
+            <img src="Photos\fishermans whraf.jpeg" class="card-img-top" alt="Fisherman's Wharf">
+            <div class="card-body">
+              <h5 class="card-title">Fisherman's Wharf</h5>
+              <p class="card-text">Bustling waterfront area with fresh seafood, street performers, souvenir shops, and the famous sea lions at Pier 39.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card">
+            <img src="Photos\park.jpg" class="card-img-top" alt="Golden Gate Park">
+            <div class="card-body">
+              <h5 class="card-title">Golden Gate Park</h5>
+              <p class="card-text">1,000+ acre urban park featuring gardens, museums, lakes, and recreational areas. Home to the de Young Museum and Japanese Tea Garden.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card">
+            <img src="Photos\CoitT.jpg" class="card-img-top" alt="Coit Tower">
+            <div class="card-body">
+              <h5 class="card-title">Coit Tower</h5>
+              <p class="card-text">Art Deco tower on Telegraph Hill offering 360-degree views of the city and bay. Features beautiful Depression-era murals inside.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Section -->
+      <div class="row">
+        <div class="col-12">
+          <h4 class="text-center mb-4">Explore San Francisco</h4>
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019736054906!2d-122.4782550846814!3d37.819928679751095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858161d975b551%3A0x4f48bfb30d07a8bb!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1688319279624!5m2!1sen!2sus"
+              width="100%" 
+              height="400" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Restaurants Section -->
+  <section id="restaurants" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Best Restaurants & Cafes</h2>
+      
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="restaurant-item">
+            <div class="restaurant-name">Tartine Bakery</div>
+            <div class="restaurant-rating">★★★★☆ (4.2/5)</div>
+            <p><strong>Cuisine:</strong> French Bakery & Cafe</p>
+            <p><strong>Specialty:</strong> Famous sourdough bread, pastries, and sandwiches</p>
+            <p><strong>Location:</strong> Mission District</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="restaurant-item">
+            <div class="restaurant-name">House of Prime Rib</div>
+            <div class="restaurant-rating">★★★★★ (4.8/5)</div>
+            <p><strong>Cuisine:</strong> American Steakhouse</p>
+            <p><strong>Specialty:</strong> Prime rib carved tableside, classic atmosphere</p>
+            <p><strong>Location:</strong> Nob Hill</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="restaurant-item">
+            <div class="restaurant-name">Swan Oyster Depot</div>
+            <div class="restaurant-rating">★★★★☆ (4.5/5)</div>
+            <p><strong>Cuisine:</strong> Fresh Seafood</p>
+            <p><strong>Specialty:</strong> Fresh oysters, Dungeness crab, counter seating only</p>
+            <p><strong>Location:</strong> Nob Hill</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="restaurant-item">
+            <div class="restaurant-name">Boudin Bakery</div>
+            <div class="restaurant-rating">★★★★☆ (4.0/5)</div>
+            <p><strong>Cuisine:</strong> American Casual</p>
+            <p><strong>Specialty:</strong> Clam chowder in sourdough bread bowl</p>
+            <p><strong>Location:</strong> Fisherman's Wharf</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="restaurant-item">
+            <div class="restaurant-name">State Bird Provisions</div>
+            <div class="restaurant-rating">★★★★★ (4.7/5)</div>
+            <p><strong>Cuisine:</strong> Contemporary American</p>
+            <p><strong>Specialty:</strong> Innovative small plates, dim sum-style service</p>
+            <p><strong>Location:</strong> Fillmore</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="restaurant-item">
+            <div class="restaurant-name">Tony's Little Star Pizza</div>
+            <div class="restaurant-rating">★★★★☆ (4.3/5)</div>
+            <p><strong>Cuisine:</strong> Italian Pizza</p>
+            <p><strong>Specialty:</strong> Deep dish and thin crust pizzas</p>
+            <p><strong>Location:</strong> Richmond District</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Things to Do Section -->
+  <section id="things" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title">Things to Do</h2>
+      
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <h5 class="activity-title">Union Square Shopping</h5>
+            <p>Premier shopping destination with luxury boutiques, department stores, and world-class dining options in the heart of downtown.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <h5 class="activity-title">Lombard Street</h5>
+            <p>Experience the "most crooked street in the world" with eight hairpin turns and beautiful landscaped gardens.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-ship"></i>
+            </div>
+            <h5 class="activity-title">Ferry Building Marketplace</h5>
+            <p>Historic ferry terminal turned gourmet marketplace featuring local artisans, farmers market, and specialty food vendors.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-palette"></i>
+            </div>
+            <h5 class="activity-title">Mission District Murals</h5>
+            <p>Explore vibrant street art and murals that tell the stories of San Francisco's diverse Latino community and culture.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h5 class="activity-title">Japanese Tea Garden</h5>
+            <p>Peaceful 5-acre garden in Golden Gate Park featuring traditional landscaping, pagodas, and authentic tea ceremonies.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-tram"></i>
+            </div>
+            <h5 class="activity-title">Cable Car Rides</h5>
+            <p>Ride the historic cable cars, the only moving National Historic Landmark, through the city's steep hills and scenic routes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Events Section -->
+  <section id="events" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Annual Events & Festivals</h2>
+      
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="event-item">
+            <div class="event-title">Chinese New Year Parade</div>
+            <div class="event-date">February</div>
+            <p>One of the largest celebrations outside of Asia, featuring elaborate floats, lion dancers, and a spectacular 268-foot Golden Dragon.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="event-item">
+            <div class="event-title">San Francisco Pride</div>
+            <div class="event-date">June</div>
+            <p>Colorful celebration of LGBTQ+ community with parades, festivals, and events throughout the city, culminating in the famous Pride Parade.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="event-item">
+            <div class="event-title">Outside Lands Music Festival</div>
+            <div class="event-date">August</div>
+            <p>Three-day music and arts festival in Golden Gate Park featuring top artists, local food, wine, beer, and art installations.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="event-item">
+            <div class="event-title">Fleet Week</div>
+            <div class="event-date">October</div>
+            <p>Military celebration featuring the Blue Angels air show, ship tours, and various military demonstrations around the Bay Area.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="event-item">
+            <div class="event-title">Hardly Strictly Bluegrass</div>
+            <div class="event-date">October</div>
+            <p>Free three-day music festival in Golden Gate Park featuring bluegrass, folk, country, and roots music on multiple stages.</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="event-item">
+            <div class="event-title">Fog City Cycle</div>
+            <div class="event-date">September</div>
+            <p>Annual cycling event taking riders through San Francisco's most scenic routes, including the Golden Gate Bridge and waterfront areas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title">Contact Information</h2>
+      
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="contact-form">
+            <h4 class="text-center mb-4">Get in Touch for Tours & Hotel Bookings</h4>
+            <form>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" required>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6 mb-
