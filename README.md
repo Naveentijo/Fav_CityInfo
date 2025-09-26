@@ -4,9 +4,9 @@ A comprehensive, responsive website showcasing the best of San Francisco - from 
 
 ## Live Demo
 
-🌐 **Visit the website**: [https://YOUR-USERNAME.github.io/sf-info-website/](https://YOUR-USERNAME.github.io/sf-info-website/)
+🌐 **Visit the website**: [(https://github.com/Naveentijo/Fav_CityInfo)]
 
-*(Replace `YOUR-USERNAME` with your actual GitHub username)*
+
 
 ## Project Overview
 
@@ -161,8 +161,8 @@ This project is for educational purposes. Feel free to use and modify for learni
 ## Contact
 
 For questions about this project:
-- GitHub: [@YOUR-USERNAME](https://github.com/YOUR-USERNAME)
-- Project Link: [https://github.com/YOUR-USERNAME/sf-info-website](https://github.com/YOUR-USERNAME/sf-info-website)
+- GitHub: [[Naveentijo](https://github.com/Naveentijo)]
+- Project Link: [[https://github.com/Naveentijo/Fav_Cityinfo]((https://github.com/Naveentijo/Fav_CityInfo)]
 
 ---
 
