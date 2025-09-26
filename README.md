@@ -88,7 +88,7 @@ The website adapts seamlessly to:
 ### For Local Development:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/sf-info-website.git
+   git clone https://github.com/Naveentijo/Fav_CityInfo.git
    ```
 2. Open `index.html` in your browser
 3. No build process required - pure HTML/CSS/JS
@@ -162,7 +162,7 @@ This project is for educational purposes. Feel free to use and modify for learni
 
 For questions about this project:
 - GitHub: [[Naveentijo](https://github.com/Naveentijo)]
-- Project Link: [[https://github.com/Naveentijo/Fav_Cityinfo]((https://github.com/Naveentijo/Fav_CityInfo)]
+- Project Link: [(https://github.com/Naveentijo/Fav_CityInfo)]
 
 ---
 
